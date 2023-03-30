@@ -1,4 +1,4 @@
-import { DEFAULT_PIN } from '../helpers/Constants';
+import { DEFAULT_PIN } from "../helpers/Constants";
 
 class AndroidSettings {
     /**
@@ -6,9 +6,9 @@ class AndroidSettings {
      */
     private get platformVersion(): number {
         return parseInt(
-            (('platformVersion' in driver.capabilities &&
-                driver.capabilities.platformVersion) as string) || '8',
-            10,
+            (("platformVersion" in driver.capabilities &&
+                driver.capabilities.platformVersion) as string) || "8",
+            10
         );
     }
 
@@ -16,10 +16,10 @@ class AndroidSettings {
      * Execute the fingerprint wizard for Android 7 or lower
      */
     private async fingerPrintWizardSevenOrLower(pin: number) {
-        await this.waitAndTap('NEXT');
+        await this.waitAndTap("NEXT");
         await this.setPinSevenOrLower(pin);
         await this.touchSensorSevenOrLower(pin);
-        await this.waitAndTap('DONE');
+        await this.waitAndTap("DONE");
     }
 
     /**
@@ -29,21 +29,23 @@ class AndroidSettings {
         // There is a difference in the order the wizard in Android 10 is executed
         if (this.platformVersion > 9) {
             await this.reEnterPin(pin);
-            await this.waitAndTap('NEXT');
+            await this.waitAndTap("NEXT");
         } else {
-            await this.waitAndTap('NEXT');
+            await this.waitAndTap("NEXT");
             await this.reEnterPin(pin);
         }
 
         await this.touchSensorEightAndHigher(pin);
-        await this.waitAndTap('DONE');
+        await this.waitAndTap("DONE");
     }
 
     /**
      * Re-enter pin and submit screen
      */
     private async reEnterPin(pin: number) {
-        await (await this.findAndroidElementByText('Re-enter your PIN')).waitForDisplayed();
+        await (
+            await this.findAndroidElementByText("Re-enter your PIN")
+        ).waitForDisplayed();
         await this.executeAdbCommand(`input text ${pin} && input keyevent 66`);
     }
 
@@ -51,23 +53,29 @@ class AndroidSettings {
      * Set the pin for Android 7 or lower
      */
     private async setPinSevenOrLower(pin: number) {
-        await this.waitAndTap('Fingerprint + PIN');
-        await this.waitAndTap('No thanks');
-        await (await this.findAndroidElementByText('Choose your PIN')).waitForDisplayed();
+        await this.waitAndTap("Fingerprint + PIN");
+        await this.waitAndTap("No thanks");
+        await (
+            await this.findAndroidElementByText("Choose your PIN")
+        ).waitForDisplayed();
         await this.executeAdbCommand(
-            `input text ${pin} && input keyevent 66 && input text ${pin} && input keyevent 66`,
+            `input text ${pin} && input keyevent 66 && input text ${pin} && input keyevent 66`
         );
-        await this.waitAndTap('DONE');
+        await this.waitAndTap("DONE");
     }
 
     /**
      * Touch sensor and enable finger print for Android 7 and lower
      */
     private async touchSensorSevenOrLower(touchCode: number) {
-        await this.waitAndTap('NEXT');
-        await (await this.findAndroidElementByText('Put your finger')).waitForDisplayed();
+        await this.waitAndTap("NEXT");
+        await (
+            await this.findAndroidElementByText("Put your finger")
+        ).waitForDisplayed();
         await driver.fingerPrint(touchCode);
-        await (await this.findAndroidElementByText('Move your finger')).waitForDisplayed();
+        await (
+            await this.findAndroidElementByText("Move your finger")
+        ).waitForDisplayed();
         await driver.fingerPrint(touchCode);
     }
 
@@ -76,15 +84,21 @@ class AndroidSettings {
      */
     private async touchSensorEightAndHigher(touchCode: number) {
         // Touch the sensor for the first time to trigger finger print
-        await (await this.findAndroidElementByText('Touch the sensor')).waitForDisplayed();
+        await (
+            await this.findAndroidElementByText("Touch the sensor")
+        ).waitForDisplayed();
         await driver.fingerPrint(touchCode);
 
         // Add finger print
-        await (await this.findAndroidElementByText('Put your finger')).waitForDisplayed();
+        await (
+            await this.findAndroidElementByText("Put your finger")
+        ).waitForDisplayed();
         await driver.fingerPrint(touchCode);
 
         // Confirm finger print
-        await (await this.findAndroidElementByText('Keep lifting')).waitForDisplayed();
+        await (
+            await this.findAndroidElementByText("Keep lifting")
+        ).waitForDisplayed();
         await driver.fingerPrint(touchCode);
     }
 
@@ -92,7 +106,7 @@ class AndroidSettings {
      * Execute ADB commands on the device
      */
     private async executeAdbCommand(adbCommand: string) {
-        await driver.execute('mobile: shell', {
+        await driver.execute("mobile: shell", {
             command: adbCommand,
         });
     }
@@ -124,16 +138,16 @@ class AndroidSettings {
         if (this.platformVersion < 8) {
             // Open the settings screen
             await this.executeAdbCommand(
-                'am start -a android.settings.SECURITY_SETTINGS',
+                "am start -a android.settings.SECURITY_SETTINGS"
             );
-            await this.waitAndTap('Fingerprint');
+            await this.waitAndTap("Fingerprint");
             await this.fingerPrintWizardSevenOrLower(DEFAULT_PIN);
         } else {
             // Open the settings screen and set screen lock to pin
             await this.executeAdbCommand(
-                `am start -a android.settings.SECURITY_SETTINGS && locksettings set-pin ${DEFAULT_PIN}`,
+                `am start -a android.settings.SECURITY_SETTINGS && locksettings set-pin ${DEFAULT_PIN}`
             );
-            await this.waitAndTap('Fingerprint');
+            await this.waitAndTap("Fingerprint");
             await this.fingerPrintWizardEightOrHigher(DEFAULT_PIN);
         }
     }

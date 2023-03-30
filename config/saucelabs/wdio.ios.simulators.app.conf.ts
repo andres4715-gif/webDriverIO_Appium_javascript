@@ -1,12 +1,10 @@
-import config from './wdio.shared.sauce.conf';
+import config from "./wdio.shared.sauce.conf";
 const buildName = `WebdriverIO Native Demo app, iOS Simulators: ${new Date().getTime()}`;
 
 // ============
 // Specs
 // ============
-config.specs = [
-    './tests/specs/**/app*.spec.ts',
-];
+config.specs = ["./tests/specs/**/app*.spec.ts"];
 
 // ============
 // Capabilities
