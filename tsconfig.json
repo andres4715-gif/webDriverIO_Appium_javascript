@@ -14,12 +14,10 @@
         "types": [
             "node",
             "webdriverio/async",
-            "@wdio/mocha-framework",
             "expect-webdriverio",
-            "@wdio/sauce-service"
+            "mocha"
         ]
     },
     "include": ["./tests/**/*.ts"],
     "exclude": ["node_modules"]
-
 }

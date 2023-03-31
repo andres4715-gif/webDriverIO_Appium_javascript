@@ -3,7 +3,7 @@
     "version": "5.3.1",
     "description": "Boilerplate project to run WebdriverIO tests with Appium to test native applications on iOS and Android",
     "scripts": {
-        "build:watch": "tsc -w",
+        "typescript.build.watch": "tsc -w",
         "android.browserstack.app": "wdio ./config/browserstack/wdio.android.bs.app.conf.ts",
         "android.sauce.emulators.app.eu": "REGION=eu  wdio config/saucelabs/wdio.android.emulators.app.conf.ts",
         "android.sauce.emulators.app.us": "wdio config/saucelabs/wdio.android.emulators.app.conf.ts",
@@ -38,6 +38,7 @@
     },
     "homepage": "https://github.com/webdriverio/appium-boilerplate#readme",
     "devDependencies": {
+        "@types/mocha": "^10.0.1",
         "@typescript-eslint/eslint-plugin": "^5.25.0",
         "@typescript-eslint/parser": "^5.25.0",
         "@wdio/appium-service": "^7.19.5",
