@@ -1,22 +1,22 @@
-import { config } from "../wdio.shared.conf";
+import { config } from '../wdio.shared.conf';
 
 // ============
 // Specs
 // ============
-config.specs = ["./tests/specs/**/app*.spec.ts"];
+config.specs = ['./tests/specs/**/app*.spec.ts'];
 config.exclude = [
     // Exclude this one because the test can only be executed on emulators/simulators
-    "./tests/specs/**/app.biometric.login.spec.ts",
+    './tests/specs/**/app.biometric.login.spec.ts',
 ];
 
 // =============================
 // Browserstack specific config
 // =============================
 // User configuration
-config.user = process.env.BROWSERSTACK_USER || "andresrios_0yr4hW";
-config.key = process.env.BROWSERSTACK_ACCESS_KEY || "AgTMPbzyrrTNM7Tcx8ih";
+config.user = process.env.BROWSERSTACK_USER || 'andresrios_0yr4hW';
+config.key = process.env.BROWSERSTACK_ACCESS_KEY || 'AgTMPbzyrrTNM7Tcx8ih';
 // Use browserstack service
-config.services = ["browserstack"];
+config.services = ['browserstack'];
 
 // ============
 // Capabilities
@@ -26,21 +26,21 @@ config.services = ["browserstack"];
 config.capabilities = [
     {
         // Set your BrowserStack config
-        "browserstack.debug": true,
+        'browserstack.debug': true,
 
         // Set URL of the application under test
         app:
             process.env.BROWSERSTACK_APP_ID ||
-            "bs://c8b3a94a04f1a1041ab1170a66f9c73b46675fc1",
+            'bs://c8b3a94a04f1a1041ab1170a66f9c73b46675fc1',
 
         // Specify device and os_version for testing
-        device: "Google Pixel 3",
-        os_version: "9.0",
+        device: 'Google Pixel 3',
+        os_version: '9.0',
 
         // Set other BrowserStack capabilities
-        project: "wdio-test-project",
-        build: "android",
-        name: "wdio-test",
+        project: 'wdio-test-project',
+        build: 'android',
+        name: 'wdio-test',
     },
 ];
 
