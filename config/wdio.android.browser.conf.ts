@@ -3,9 +3,7 @@ import config from './wdio.shared.local.appium.conf';
 // ============
 // Specs
 // ============
-config.specs = [
-    './tests/specs/**/browser*.spec.ts',
-];
+config.specs = ['./tests/specs/**/browser*.spec.ts'];
 
 // ============
 // Capabilities
@@ -21,8 +19,8 @@ config.capabilities = [
         // For W3C the appium capabilities need to have an extension prefix
         // http://appium.io/docs/en/writing-running-appium/caps/
         // This is `appium:` for all Appium Capabilities which can be found here
-        'appium:deviceName': 'Pixel_3_10.0',
-        'appium:platformVersion': '10.0',
+        'appium:deviceName': 'AutomationTest',
+        'appium:platformVersion': '11.0',
         'appium:orientation': 'PORTRAIT',
         'appium:newCommandTimeout': 240,
     },

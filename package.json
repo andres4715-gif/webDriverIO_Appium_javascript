@@ -14,7 +14,8 @@
         "ios.sauce.simulators.app.eu": "REGION=eu wdio ./config/saucelabs/wdio.ios.simulators.app.conf.ts",
         "ios.sauce.simulators.app.us": "wdio ./config/saucelabs/wdio.ios.simulators.app.conf.ts",
         "ios.browser": "wdio config/wdio.ios.browser.conf.ts",
-        "lint": "eslint config tests --fix"
+        "lint": "eslint config tests",
+        "lint.fix": "eslint config tests --fix"
     },
     "repository": {
         "type": "git",
