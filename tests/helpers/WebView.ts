@@ -51,8 +51,9 @@ class WebView {
     /**
      * Returns an object with the list of all available contexts
      */
-    async getCurrentContexts ():Promise<string[]> {
-        return driver.getContexts();
+    async getCurrentContexts(): Promise<string[]> {
+        const contexts = await driver.getContexts();
+        return contexts.map(context => context as string);
     }
 
     /**
