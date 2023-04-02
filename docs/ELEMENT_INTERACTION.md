@@ -81,3 +81,40 @@ async clickOnFirstCheckBox() {
 }
 ```
 ___
+
+## **General element:**
+
+How can check if element exist or not: 
+```javascript
+.not.toBeExisting()
+.toBeExisting()
+```
+```javascript
+- Example: 
+
+    get btnStart () {
+        return $('button=Start');
+    }
+
+    get loadedPage () {
+        return $('#finish');
+    }
+```
+
+EXAMPLE .not.toBeExisting();
+
+```javascript
+async checkLouderNotExisting() {
+    await expect(this.loadedPage).not.toBeExisting();
+}
+```
+
+EXAMPLE .toBeExisting();
+
+```javascript
+async checkLouderExisting() {
+    (await this.loadedPage).waitForExist();
+    await expect(this.loadedPage).toBeExisting();
+}
+```
+___
