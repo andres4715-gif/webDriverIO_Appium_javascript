@@ -47,7 +47,7 @@ describe('WebdriverIO and Appium, when interacting with a biometric button,', ()
         await expect(await NativeAlert.text()).toContain('Success\nYou are logged in!');
 
         // Close the alert
-        await NativeAlert.topOnButtonWithText('OK');
+        await NativeAlert.tapOnButtonWithText('OK');
         await NativeAlert.waitForIsShown(false);
     });
 
@@ -66,10 +66,10 @@ describe('WebdriverIO and Appium, when interacting with a biometric button,', ()
             await expect(await NativeAlert.text()).toContain('Try Again');
 
             // Close the alert
-            await NativeAlert.topOnButtonWithText('Cancel');
+            await NativeAlert.tapOnButtonWithText('Cancel');
             try {
                 // In certain situations we need to Cancel it again for this specific app
-                await NativeAlert.topOnButtonWithText('Cancel');
+                await NativeAlert.tapOnButtonWithText('Cancel');
             } catch (ign) {
                 // Do nothing
             }

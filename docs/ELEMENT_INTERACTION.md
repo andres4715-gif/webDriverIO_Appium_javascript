@@ -87,7 +87,19 @@ ___
 How can do a click to check or uncheck a button:  .click();
 
 ```javascript
-- Example: 
+- Example 1: 
+
+    private get loginContainerButton () {
+        return $('~button-login-container');}
+
+    async tapOnLoginContainerButton() {
+        await this.loginContainerButton.click();
+    }
+```
+
+
+```javascript
+- Example 2: 
 
     get btnRegister () {
         return $('#register');

@@ -7,6 +7,11 @@ import config from './wdio.shared.local.appium.conf';
 config.specs = ['./tests/specs/**/app*.spec.ts'];
 
 // ============
+// Run a specific test case, to do this you would need to comment previous specs
+// ============
+// config.specs = ['./tests/specs/**/app.login.spec.ts'];
+
+// ============
 // Capabilities
 // ============
 // For all capabilities please check

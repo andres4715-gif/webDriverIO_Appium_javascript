@@ -19,15 +19,15 @@ class LoginScreen extends AppScreen {
         return this.biometricButton.isDisplayed();
     }
 
-    async tapOnLoginContainerButton(){
+    async tapOnLoginContainerButton() {
         await this.loginContainerButton.click();
     }
 
-    async tapOnSignUpContainerButton(){
+    async tapOnSignUpContainerButton() {
         await this.signUpContainerButton.click();
     }
 
-    async tapOnBiometricButton(){
+    async tapOnBiometricButton() {
         await this.biometricButton.click();
     }
 
