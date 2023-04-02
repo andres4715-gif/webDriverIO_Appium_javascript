@@ -1,6 +1,8 @@
 # **Element interaction:** 
 
-## Wait until the element is present: 
+## **Waits**
+
+### Wait until the element is present: 
 ```javascript
 waitForDisplayed({ timeout: 3000 }
 
@@ -10,6 +12,21 @@ async  checkFirstCheckboxNotChecked() {
     await  this.firstCheckbox.waitForDisplayed({ timeout: 3000 });
 }
 ```
+
+### waitForDisplayed
+
+```javascript
+    get flash () {
+        return $('#flash');
+    }
+```
+- waitForDisplayed
+```javascript
+   async verifyMessageAfterAddingWrongCredentials() {
+        await this.flash.waitForDisplayed({ timeout: 3000 });
+    }
+```
+
 ___
 ## **Checkbox:** 
 How can check it the checkbox is not checked:  .not.toBeChecked();
@@ -116,5 +133,71 @@ async checkLouderExisting() {
     (await this.loadedPage).waitForExist();
     await expect(this.loadedPage).toBeExisting();
 }
+```
+___
+
+## **Text Validation:**
+
+toHaveTextContaining()
+
+```javascript
+    get flash () {
+        return $('#flash');
+    }
+```
+- Check if the obtained text contains expected text
+
+```javascript
+   async verifyMessageAfterAddingWrongCredentials() {
+        await expect(this.flash).toHaveTextContaining('Your username is invalid!');
+    }
+```
+___
+
+## **setValue:**
+
+setValue()
+
+```javascript
+    get username () {
+        return $('#username');
+    }
+
+    get password () {
+        return $('#password');
+    }
+```
+
+- **EXAMPLE 1:** 
+
+```javascript
+   async login (username:string, password:string) {
+        await this.username.setValue(username);
+        await this.password.setValue(password);
+    }
+```
+- Call this method from the test: 
+
+```javascript
+describe('auth form', () => {
+    it('should deny access with wrong credentials',  async () => {
+        await FormPage.login('foo', 'bar!');
+    });
+```
+- **EXAMPLE 2:** 
+
+```javascript
+   async login ({ username, password }: {username:string; password: string;}) {
+        await this.username.setValue(username);
+        await this.password.setValue(password);
+    }
+```
+- Call this method from the test: 
+
+```javascript
+describe('auth form', () => {
+    it('should deny access with wrong credentials',  async () => {
+        await FormPage.login({ username:'tomsmith', password: 'SuperSecretPassword!' });
+    });
 ```
 ___

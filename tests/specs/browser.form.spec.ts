@@ -1,17 +1,15 @@
 import FormPage from '../pageobjects/form.page';
 
 describe('auth form', () => {
-    it('should deny access with wrong creds',  async () => {
+    it('should deny access with wrong credentials',  async () => {
         await FormPage.open();
-        await FormPage.login({ username:'foo', password: 'bar!' });
-        await FormPage.flash.waitForDisplayed({ timeout: 3000 });
-        await expect(await FormPage.flash).toHaveTextContaining('Your username is invalid!');
+        await FormPage.login('foo', 'bar!');
+        await FormPage.verifyMessageAfterAddingWrongCredentials('Your username is invalid!');
     });
 
-    it('should allow access with correct creds',  async () => {
+    it('should allow access with valid credentials',  async () => {
         await FormPage.open();
-        await FormPage.login({ username:'tomsmith', password: 'SuperSecretPassword!' });
-        await FormPage.flash.waitForDisplayed({ timeout: 3000 });
-        await expect(await FormPage.flash).toHaveTextContaining('You logged into a secure area!');
+        await FormPage.login('tomsmith', 'SuperSecretPassword!');
+        await FormPage.verifyMessageAfterAddingWrongCredentials('You logged into a secure area!');
     });
 });

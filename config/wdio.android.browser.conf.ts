@@ -8,7 +8,7 @@ config.specs = ['./tests/specs/**/browser*.spec.ts'];
 // ============
 // Run a specific test case, to do this you would need to comment previous specs
 // ============
-// config.specs = ['./tests/specs/**/browser.dynamic.spec.ts'];
+// config.specs = ['./tests/specs/**/browser.form.spec.ts'];
 
 // ============
 // Capabilities
