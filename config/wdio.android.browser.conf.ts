@@ -6,6 +6,11 @@ import config from './wdio.shared.local.appium.conf';
 config.specs = ['./tests/specs/**/browser*.spec.ts'];
 
 // ============
+// Run a specific test case, to do this you would need to comment previous specs
+// ============
+// config.specs = ['./tests/specs/**/browser.checkbox.spec.ts'];
+
+// ============
 // Capabilities
 // ============
 // For all capabilities please check
