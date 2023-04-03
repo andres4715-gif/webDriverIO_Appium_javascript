@@ -59,6 +59,11 @@ class NativeAlert {
 
         return `${await $(SELECTORS.ANDROID.ALERT_TITLE).getText()}\n${await $(SELECTORS.ANDROID.ALERT_MESSAGE).getText()}`;
     }
+
+    static async checkSuccessLoginMessage(expectedMessage: string) {
+        let message = await this.text();
+        await expect(message).toEqual(expectedMessage);
+    }
 }
 
 export default NativeAlert;

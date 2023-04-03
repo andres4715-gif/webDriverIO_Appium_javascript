@@ -16,15 +16,15 @@ async  checkFirstCheckboxNotChecked() {
 ### waitForDisplayed
 
 ```javascript
-    get flash () {
-        return $('#flash');
-    }
+get flash () {
+    return $('#flash');
+}
 ```
 - waitForDisplayed
 ```javascript
-   async verifyMessageAfterAddingWrongCredentials() {
-        await this.flash.waitForDisplayed({ timeout: 3000 });
-    }
+async verifyMessageAfterAddingWrongCredentials() {
+    await this.flash.waitForDisplayed({ timeout: 3000 });
+}
 ```
 
 ___
@@ -89,21 +89,21 @@ How can do a click to check or uncheck a button:  .click();
 ```javascript
 - Example 1: 
 
-    private get loginContainerButton () {
-        return $('~button-login-container');}
+private get loginContainerButton () {
+    return $('~button-login-container');}
 
-    async tapOnLoginContainerButton() {
-        await this.loginContainerButton.click();
-    }
+async tapOnLoginContainerButton() {
+    await this.loginContainerButton.click();
+}
 ```
 
 
 ```javascript
 - Example 2: 
 
-    get btnRegister () {
-        return $('#register');
-    }
+get btnRegister () {
+    return $('#register');
+}
 
 async clickOnFirstCheckBox() {
     (await this.btnRegister).click();
@@ -121,13 +121,13 @@ How can check if element exist or not:
 ```javascript
 - Example: 
 
-    get btnStart () {
-        return $('button=Start');
-    }
+get btnStart () {
+    return $('button=Start');
+}
 
-    get loadedPage () {
-        return $('#finish');
-    }
+get loadedPage () {
+    return $('#finish');
+}
 ```
 
 EXAMPLE .not.toBeExisting();
@@ -150,19 +150,57 @@ ___
 
 ## **Text Validation:**
 
-toHaveTextContaining()
+### **toHaveTextContaining()**
 
 ```javascript
-    get flash () {
-        return $('#flash');
-    }
+get flash () {
+    return $('#flash');
+}
 ```
 - Check if the obtained text contains expected text
 
 ```javascript
-   async verifyMessageAfterAddingWrongCredentials() {
-        await expect(this.flash).toHaveTextContaining('Your username is invalid!');
-    }
+async verifyMessageAfterAddingWrongCredentials() {
+    await expect(this.flash).toHaveTextContaining('Your username is invalid!');
+}
+```
+
+### **toEqual()**
+
+Note: First you would need to have the obtained message with any method getting the text: 
+
+- Example: 
+
+```javascript
+static async text ():Promise<string> {
+    if (driver.isIOS) {
+        return driver.getAlertText();
+}
+
+    return `${await $(SELECTORS.ANDROID.ALERT_TITLE).getText()}\n${await $(SELECTORS.ANDROID.ALERT_MESSAGE).getText()}`;
+}
+```
+The obtained text for after this method execution is: 
+
+```text
+'Signed Up!\nYou successfully signed up!'
+```
+
+Now you would need to create a method to check the obtained message against expected message, something like this. 
+
+```javascript 
+static async checkSuccessLoginMessage(expectedMessage: string) {
+    let message = await this.text();
+    await expect(message).toEqual(expectedMessage);
+}
+```
+
+After this you would need to call this static method from the test case, Something like this. 
+
+```javascript
+import NativeAlert from '../screenobjects/components/NativeAlert';
+
+await NativeAlert.checkSuccessLoginMessage('Success\nYou are logged in!');
 ```
 ___
 
@@ -171,22 +209,22 @@ ___
 setValue()
 
 ```javascript
-    get username () {
-        return $('#username');
-    }
+get username () {
+    return $('#username');
+}
 
-    get password () {
-        return $('#password');
-    }
+get password () {
+    return $('#password');
+}
 ```
 
 - **EXAMPLE 1:** 
 
 ```javascript
-   async login (username:string, password:string) {
-        await this.username.setValue(username);
-        await this.password.setValue(password);
-    }
+async login (username:string, password:string) {
+    await this.username.setValue(username);
+    await this.password.setValue(password);
+}
 ```
 - Call this method from the test: 
 
@@ -199,10 +237,10 @@ describe('auth form', () => {
 - **EXAMPLE 2:** 
 
 ```javascript
-   async login ({ username, password }: {username:string; password: string;}) {
-        await this.username.setValue(username);
-        await this.password.setValue(password);
-    }
+async login ({ username, password }: {username:string; password: string;}) {
+    await this.username.setValue(username);
+    await this.password.setValue(password);
+}
 ```
 - Call this method from the test: 
 

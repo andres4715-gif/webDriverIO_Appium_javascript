@@ -76,4 +76,44 @@ Checking if the WebView is loaded including the webpage can be done in **4 secon
 [11:31:21]  COMMAND     GET      "/wd/hub/session/0516bba1-e64d-4873-bdd4-1f5e8070960f/contexts"
 [11:31:21]  DATA                {}
 [11:31:21]  RESULT              ["NATIVE_APP","WEBVIEW_8228.2"]
+
+```
+___
+# **Import and Export files:**
+
+## To export a class to use it on different files you would need to use this way to export and import: 
+
+
+```javascript
+class NativeAlert {
+
+    static async method1() {
+        // add the necessary code.
+    }
+
+    static async method2(text: string) {
+        // add the necessary code.
+    }
+
+    static async method3() {
+        // add the necessary code.
+    }
+}
+
+export default NativeAlert;
+```
+
+```text
+Using: export default NativeAlert;
+
+exports an existing class called NativeAlert so that it can be used in other files via an import statement. That is, the class itself is being exported so that it can be used in other files.
+
+```
+
+- To import this file from any test case: 
+
+```javascript
+import NativeAlert from '../screenobjects/components/NativeAlert';
+
+await NativeAlert.method2('example string');
 ```
