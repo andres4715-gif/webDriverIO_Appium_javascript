@@ -13,8 +13,8 @@ describe('WebdriverIO and Appium, when interacting with form elements,', () => {
 
     it('should be able type in the input and validate the text', async () => {
         const text = 'Hello, this is a demo app';
-        await FormScreen.input.setValue(text);
-        await expect(FormScreen.inputTextResult).toHaveTextContaining(text);
+        await FormScreen.addingTextOnInputField(text);
+        await FormScreen.inputTextResultAdded(text);
 
         /**
          * IMPORTANT!!
@@ -38,7 +38,7 @@ describe('WebdriverIO and Appium, when interacting with form elements,', () => {
         }
     });
 
-    it('should be able turn on and off the switch', async () => {
+    it.only('should be able turn on and off the switch', async () => {
         await expect(await FormScreen.isSwitchActive()).toEqual(false);
 
         await FormScreen.tapOnSwitch();

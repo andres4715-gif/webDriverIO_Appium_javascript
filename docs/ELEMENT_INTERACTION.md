@@ -152,6 +152,7 @@ ___
 
 ### **toHaveTextContaining()**
 
+**EXAMPLE 1:**
 ```javascript
 get flash () {
     return $('#flash');
@@ -163,6 +164,31 @@ get flash () {
 async verifyMessageAfterAddingWrongCredentials() {
     await expect(this.flash).toHaveTextContaining('Your username is invalid!');
 }
+```
+**EXAMPLE 2:**
+
+- Element:
+
+```javascript
+get inputTextResult () {
+    return $('~input-text-result');}
+```
+- Check if the obtained text contains expected text
+
+```javascript
+async inputTextResultAdded(text: string) {
+    await expect(this.inputTextResult).toHaveTextContaining(text);
+}
+```
+- Call this method form a test case: 
+
+```javascript
+import FormScreen from '../screenobjects/FormsScreen';
+
+it.only('should be able type in the input and validate the text', async () => {
+    const verifyText = 'Hello, this is a demo app';
+    await FormScreen.inputTextResultAdded(verifyText);
+});      
 ```
 
 ### **toEqual()**

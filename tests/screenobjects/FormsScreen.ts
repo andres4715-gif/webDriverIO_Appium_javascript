@@ -33,6 +33,14 @@ class FormsScreen extends AppScreen {
         await this.inActiveButton.click();
     }
 
+    async addingTextOnInputField(text: string) {
+        (await this.input).setValue(text);
+    }
+
+    async inputTextResultAdded(text: string) {
+        await expect(this.inputTextResult).toHaveTextContaining(text);
+    }
+
     /**
      * Return if the switch is active or not active for iOS / Android
      * For Android the switch is `ON|OFF`, for iOS '1|0'
